@@ -1,0 +1,48 @@
+$grey: rgb(188, 189, 196);
+
+.dropdown {
+  color: $grey;
+  position: relative;
+
+  &-label {
+    font-size: 0.9rem;
+  }
+
+  &-selected {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $grey;
+    cursor: pointer;
+    img {
+      width: 1.3rem;
+      height: 1.3rem;
+      transition: transform 0.3s ease-out;
+      &.rotated {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &-selected , &-list{
+    font-size: 1.3rem;
+    color: black;
+  }
+
+  &-list {
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    background-color: white;
+    padding: 0 0 0 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      padding-left: 1rem;
+      &:hover {
+        background-color: $grey;
+      }
+    }
+  }
+}
