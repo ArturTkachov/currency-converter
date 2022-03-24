@@ -1,0 +1,16 @@
+main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+#currency-panels {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  > div {
+    width: 48%;
+  }
+  &.swapped {
+    flex-direction: row-reverse;
+  }
+}
