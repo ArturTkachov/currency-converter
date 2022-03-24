@@ -1,0 +1,14 @@
+$pink: rgb(226,7,128);
+
+.pink-button {
+  outline: none;
+  border: none;
+  color: white;
+  padding: 1rem 10rem;
+  cursor: pointer;
+  border-radius: 13rem;
+  background-color: $pink;
+  &:hover {
+    background-color: darken($pink, 10%);
+  }
+}

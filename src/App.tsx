@@ -2,6 +2,7 @@ import React, { ChangeEventHandler, useState } from 'react';
 import Dropdown from 'components/Dropdown';
 import CurrencyInput from 'components/CurrencyInput';
 import useCurrencyRatios from 'hooks/useCurrencyRatios';
+import { getProductToFixed, getQuotientToFixed } from 'utility/multiplication';
 import { Currencies, Currency, LowercaseCurrency } from 'types/Currency';
 import './App.css';
 
@@ -24,13 +25,13 @@ function App() {
     const value = parseFloat(e.target.value);
     if (isNaN(value)) return;
     setFromValue(String(value));
-    seToValue(String((value * ratio).toFixed(2)));
+    seToValue(getProductToFixed(value, ratio));
   };
 
   const handleToValueChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = parseFloat(e.target.value);
     if (isNaN(value)) return;
-    setFromValue(String((value / ratio).toFixed(2)));
+    setFromValue(getQuotientToFixed(value, ratio));
     seToValue(String(value));
   };
 
