@@ -1,7 +1,8 @@
 import React, { ChangeEventHandler, useState } from 'react';
 import Dropdown from 'components/Dropdown';
-import CurrencyInput from './components/CurrencyInput';
-import { Currencies, Currency } from 'types/Currency';
+import CurrencyInput from 'components/CurrencyInput';
+import useCurrencyRatios from 'hooks/useCurrencyRatios';
+import { Currencies, Currency, LowercaseCurrency } from 'types/Currency';
 import './App.css';
 
 function App() {
@@ -12,17 +13,24 @@ function App() {
   const [fromValue, setFromValue] = useState('');
   const [toValue, seToValue] = useState('');
 
+  const { data } = useCurrencyRatios(from);
+  let ratio = data
+    ? +data[from.toLowerCase() as LowercaseCurrency][
+        to.toLowerCase() as LowercaseCurrency
+      ]
+    : 1;
+
   const handleFromValueChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = parseFloat(e.target.value);
     if (isNaN(value)) return;
     setFromValue(String(value));
-    seToValue(String(value * 2));
+    seToValue(String((value * ratio).toFixed(2)));
   };
 
   const handleToValueChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = parseFloat(e.target.value);
     if (isNaN(value)) return;
-    setFromValue(String(value / 2));
+    setFromValue(String((value / ratio).toFixed(2)));
     seToValue(String(value));
   };
 
