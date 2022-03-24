@@ -1,7 +1,7 @@
-$grey: rgb(188, 189, 196);
+@use 'src/modules/colors.scss';
 
 .dropdown {
-  color: $grey;
+  color: colors.$grey;
   position: relative;
 
   &-label {
@@ -12,7 +12,7 @@ $grey: rgb(188, 189, 196);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid $grey;
+    border-bottom: 1px solid colors.$grey;
     cursor: pointer;
     img {
       width: 1.3rem;
@@ -41,7 +41,7 @@ $grey: rgb(188, 189, 196);
     li {
       padding-left: 1rem;
       &:hover {
-        background-color: $grey;
+        background-color: colors.$grey;
       }
     }
   }

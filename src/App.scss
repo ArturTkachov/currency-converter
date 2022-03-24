@@ -1,16 +1,30 @@
+@use 'src/modules/mixins.scss';
+
 main {
   width: 70%;
   margin: 0 auto;
+  @media (max-width: 480px) {
+    width: 98%;
+  }
+  @media (min-width: 481px) and (max-width: 900px) {
+    width: 90%;
+  }
 }
 
 #currency-panels {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  > div {
-    width: 48%;
-  }
+  @include mixins.panels;
   &.swapped {
     flex-direction: row-reverse;
+    @media (max-width: 480px){
+      & {
+        flex-direction: column-reverse;
+      }
+    }
   }
 }
+
+#bottom-panels {
+  @include mixins.panels;
+  margin-top: 1.5rem
+}
+

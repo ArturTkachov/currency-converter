@@ -1,0 +1,19 @@
+@use 'src/modules/colors.scss';
+
+.exchange-ratio {
+  height: 3rem;
+  width: max-content;
+  span {
+    display: block;
+    &:first-of-type {
+      font-size: 0.8rem;
+      color: colors.$grey;
+    }
+    &:nth-of-type(2) {
+      font: {
+        size: 1.4rem;
+        weight: 500;
+      }
+    }
+  }
+}

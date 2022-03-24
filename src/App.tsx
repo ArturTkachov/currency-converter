@@ -6,6 +6,7 @@ import { getProductToFixed, getQuotientToFixed } from 'utility/multiplication';
 import PinkButton from './components/PinkButton';
 import { Currencies, Currency, LowercaseCurrency } from 'types/Currency';
 import './App.scss';
+import ExchangeRatio from './components/ExchangeRatio';
 
 function App() {
   const [from, setFrom] = useState<Currency>('USD');
@@ -77,7 +78,17 @@ function App() {
           />
         </div>
       </div>
-      <PinkButton text="Swap" handleClick={handleSwap} />
+      <div id="bottom-panels">
+        <div>
+          <PinkButton text="Swap" handleClick={handleSwap} />
+        </div>
+        <div>
+          <ExchangeRatio
+            from={isSwapped ? to : from}
+            to={isSwapped ? from : to}
+          />
+        </div>
+      </div>
     </main>
   );
 }

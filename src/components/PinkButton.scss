@@ -1,14 +1,17 @@
-$pink: rgb(226,7,128);
+@use 'src/modules/colors.scss';
 
 .pink-button {
   outline: none;
   border: none;
   color: white;
-  padding: 1rem 10rem;
+  padding: 1rem 0;
+  width: 100%;
+  //padding: 1rem 10rem;
   cursor: pointer;
   border-radius: 13rem;
-  background-color: $pink;
+  //max-width: 100%;
+  background-color: colors.$pink;
   &:hover {
-    background-color: darken($pink, 10%);
+    background-color: darken(colors.$pink, 10%);
   }
 }
