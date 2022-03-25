@@ -1,12 +1,12 @@
 import React, { ChangeEventHandler, useState } from 'react';
 import Dropdown from 'components/Dropdown';
 import CurrencyInput from 'components/CurrencyInput';
-import useCurrencyRatios from 'hooks/useCurrencyRatios';
+import useExchangeRates from 'hooks/useExchangeRates';
 import { getProductToFixed, getQuotientToFixed } from 'utility/multiplication';
-import PinkButton from './components/PinkButton';
+import PinkButton from 'components/PinkButton';
+import ExchangeRate from 'components/ExchangeRate';
 import { Currencies, Currency, LowercaseCurrency } from 'types/Currency';
 import './App.scss';
-import ExchangeRatio from './components/ExchangeRatio';
 
 function App() {
   const [from, setFrom] = useState<Currency>('USD');
@@ -16,8 +16,8 @@ function App() {
   const [fromValue, setFromValue] = useState('');
   const [toValue, setToValue] = useState('');
 
-  const { data } = useCurrencyRatios(from);
-  let ratio = data
+  const { data } = useExchangeRates(from);
+  let rate = data
     ? +data[from.toLowerCase() as LowercaseCurrency][
         to.toLowerCase() as LowercaseCurrency
       ]
@@ -27,24 +27,24 @@ function App() {
     const value = parseFloat(e.target.value);
     if (isNaN(value)) return;
     setFromValue(String(value));
-    setToValue(getProductToFixed(value, ratio));
+    setToValue(getProductToFixed(value, rate));
   };
 
   const handleToValueChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = parseFloat(e.target.value);
     if (isNaN(value)) return;
-    setFromValue(getQuotientToFixed(value, ratio));
+    setFromValue(getQuotientToFixed(value, rate));
     setToValue(String(value));
   };
 
   const [isSwapped, setIsSwapped] = useState(false);
   const handleSwap = () => {
     if (isSwapped) {
-      setFromValue(getProductToFixed(+fromValue, ratio));
-      setToValue(getProductToFixed(+toValue, ratio));
+      setFromValue(getProductToFixed(+fromValue, rate));
+      setToValue(getProductToFixed(+toValue, rate));
     } else {
-      setFromValue(getQuotientToFixed(+fromValue, ratio));
-      setToValue(getQuotientToFixed(+toValue, ratio));
+      setFromValue(getQuotientToFixed(+fromValue, rate));
+      setToValue(getQuotientToFixed(+toValue, rate));
     }
     setIsSwapped(!isSwapped);
   };
@@ -83,7 +83,7 @@ function App() {
           <PinkButton text="Swap" handleClick={handleSwap} />
         </div>
         <div>
-          <ExchangeRatio
+          <ExchangeRate
             from={isSwapped ? to : from}
             to={isSwapped ? from : to}
           />
