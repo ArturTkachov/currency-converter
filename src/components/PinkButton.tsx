@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import './PinkButton.scss';
 
 interface Props {
@@ -6,10 +6,10 @@ interface Props {
   handleClick: () => void;
 }
 
-const PinkButton: FC<Props> = (props) => (
+const PinkButton: FC<Props> = React.memo((props) => (
   <button className="pink-button" onClick={props.handleClick}>
     {props.text}
   </button>
-);
+));
 
 export default PinkButton;

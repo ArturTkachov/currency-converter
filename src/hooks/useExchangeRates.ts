@@ -12,7 +12,11 @@ export const getExchangeRates = async (
 };
 
 const useExchangeRates = (currency: Currency) => {
-  const { data, error } = useSWR(currency, getExchangeRates);
+  const { data, error } = useSWR(currency, getExchangeRates, {
+    revalidateIfStale: false,
+    refreshInterval: 300000,
+    dedupingInterval: 300000,
+  });
 
   return {
     data,

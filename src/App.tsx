@@ -5,6 +5,7 @@ import useExchangeRates from 'hooks/useExchangeRates';
 import { getProductToFixed, getQuotientToFixed } from 'utility/multiplication';
 import PinkButton from 'components/PinkButton';
 import ExchangeRate from 'components/ExchangeRate';
+import RateChange from './components/RateChange';
 import { Currencies, Currency, LowercaseCurrency } from 'types/Currency';
 import './App.scss';
 
@@ -87,6 +88,7 @@ function App() {
             from={isSwapped ? to : from}
             to={isSwapped ? from : to}
           />
+          <RateChange from={isSwapped ? to : from} to={isSwapped ? from : to} />
         </div>
       </div>
     </main>

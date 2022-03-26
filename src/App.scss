@@ -2,7 +2,7 @@
 
 main {
   width: 70%;
-  margin: 0 auto;
+  margin: 2rem auto 0;
   @media (max-width: 480px) {
     width: 98%;
   }
@@ -25,6 +25,12 @@ main {
 
 #bottom-panels {
   @include mixins.panels;
-  margin-top: 1.5rem
+  margin-top: 1.5rem;
+  > div:nth-of-type(2) {
+    display: flex;
+    .exchange-rate {
+      margin-right: 1rem;
+    }
+  }
 }
 

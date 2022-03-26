@@ -1,0 +1,42 @@
+@use 'src/modules/colors.scss';
+
+.exchange-rate-change {
+  height: 3rem;
+  width: max-content;
+  .exchange-rate-triangle {
+    display: inline-block;
+    color: red;
+    font-size: 0.8rem;
+  }
+  span {
+    display: block;
+    &:first-of-type {
+      font-size: 0.8rem;
+      color: colors.$grey;
+    }
+    &:nth-of-type(2) {
+      color: red;
+      font: {
+        size: 1.4rem;
+        weight: 500;
+      }
+      &:before {
+        font-size: 0.8rem;
+        content: '▼';
+      }
+    }
+  }
+  &.grew {
+    .exchange-rate-triangle {
+      display: inline-block;
+      color: green;
+      font-size: 0.8rem;
+    }
+    span:nth-of-type(2) {
+      color: green;
+      &:before {
+        content: '▲';
+      }
+    }
+  }
+}
