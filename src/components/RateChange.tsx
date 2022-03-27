@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import useExchangeRates from 'hooks/useExchangeRates';
 import useDateRates from 'hooks/useDateRates';
 import { getFormattedDateString } from 'utility/getFormattedDateString';
-import { getRateFromRates } from 'utility/getRateFromRates';
 import { Currency } from 'types/Currency';
 import './RateChange.scss';
 
@@ -20,10 +19,8 @@ const ExchangeRateChange: FC<Props> = React.memo((props) => {
   const dateString = getFormattedDateString(yesterday);
   const { data: yesterdaysRates } = useDateRates(from, dateString);
 
-  const rate1 = rates ? getRateFromRates(rates, from, to) : 1;
-  const rate2 = yesterdaysRates
-    ? getRateFromRates(yesterdaysRates, from, to)
-    : 1;
+  const rate1 = rates ? rates.rates[to] : 1;
+  const rate2 = yesterdaysRates ? yesterdaysRates.rates[to] : 1;
 
   const difference = rate1 - rate2;
   const percentage = (difference / rate2) * 100;

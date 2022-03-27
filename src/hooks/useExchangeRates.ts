@@ -6,7 +6,7 @@ export const getExchangeRates = async (
   currency: Currency
 ): Promise<ExchangeRates> => {
   const res = await fetch(
-    `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency.toLowerCase()}.min.json`
+    `https://api.frankfurter.app/latest?from=${currency}`
   );
   return await res.json();
 };

@@ -1,7 +1,9 @@
-import { LowercaseCurrency } from './Currency';
+import { Currency } from './Currency';
 
-export type ExchangeRates = { date: string } & {
-  [key in LowercaseCurrency]: {
-    [key in LowercaseCurrency]: string;
+export type ExchangeRates = {
+  date: string;
+  base: Currency;
+  rates: {
+    [key in Currency]: number;
   };
 };

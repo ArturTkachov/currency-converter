@@ -11,8 +11,8 @@ interface Props {
 const CurrencyInput: FC<Props> = (props) => {
   const curSigns: CurrencySignsMap = {
     USD: '$',
-    BYN: 'Br',
-    RUB: '₽',
+    EUR: '€',
+    CZK: 'Kč',
   };
   const sign = curSigns[props.currency];
 

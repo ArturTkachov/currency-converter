@@ -7,14 +7,18 @@ export const getCurrencyRatesForDate = async (
   date: string
 ): Promise<ExchangeRates> => {
   const res = await fetch(
-    `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date}/currencies/${currency.toLowerCase()}.min.json`
+    `https://api.frankfurter.app/${date}?from=${currency}`
   );
 
   return await res.json();
 };
 
 const useDateRates = (currency: Currency, date: string) => {
-  const { data, error } = useSWR([currency, date], getCurrencyRatesForDate);
+  const { data, error } = useSWR([currency, date], getCurrencyRatesForDate, {
+    revalidateIfStale: false,
+    refreshInterval: 300000,
+    dedupingInterval: 300000,
+  });
 
   return {
     data,
