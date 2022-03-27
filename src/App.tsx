@@ -35,6 +35,20 @@ function App() {
     setToValue(String(value));
   };
 
+  const handleFromOptionClick = (option: string) => {
+    setFrom(option as Currency);
+    const rate = data ? data.rates[option as Currency] : 1;
+    console.log(rate, toValue);
+    setToValue(getQuotientToFixed(+toValue, rate));
+  };
+
+  const handleToOptionClick = (option: string) => {
+    setTo(option as Currency);
+    const rate = data ? data.rates[option as Currency] : 1;
+    console.log(rate, fromValue);
+    setFromValue(getProductToFixed(+toValue, rate));
+  };
+
   const [isSwapped, setIsSwapped] = useState(false);
   const handleSwap = () => {
     if (isSwapped) {
@@ -54,7 +68,7 @@ function App() {
             labelText={isSwapped ? 'To' : 'From'}
             options={currencies}
             currentOptionIndex={currencies.indexOf(from)}
-            setOption={setFrom}
+            handleOptionClick={handleFromOptionClick}
           />
           <CurrencyInput
             currency={from}
@@ -67,7 +81,7 @@ function App() {
             labelText={isSwapped ? 'From' : 'To'}
             options={currencies}
             currentOptionIndex={currencies.indexOf(to)}
-            setOption={setTo}
+            handleOptionClick={handleToOptionClick}
           />
           <CurrencyInput
             currency={to}

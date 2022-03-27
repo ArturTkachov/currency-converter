@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { FC, useState } from 'react';
 import chevronSrc from '../assets/chevron-right.svg';
 import './Dropdown.scss';
 
@@ -21,13 +21,13 @@ const DropdownSelected: FC<SelectedProps> = (props) => (
 
 interface ListProps {
   options: string[];
-  setOption: Dispatch<SetStateAction<any>>;
+  handleOptionClick: (arg: string) => void;
 }
 
 const DropdownList: FC<ListProps> = (props) => (
   <ul className="dropdown-list">
     {props.options.map((option) => (
-      <li key={option} onClick={() => props.setOption(option)}>
+      <li key={option} onClick={() => props.handleOptionClick(option)}>
         {option}
       </li>
     ))}
@@ -38,13 +38,12 @@ interface DropdownProps {
   labelText: string;
   options: string[];
   currentOptionIndex: number;
-  setOption: Dispatch<SetStateAction<any>>;
+  handleOptionClick: (arg: string) => void;
 }
 
 const Dropdown: FC<DropdownProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const options = props.options;
-  const index = props.currentOptionIndex;
+  const { options, currentOptionIndex: index, handleOptionClick } = props;
 
   return (
     <div className="dropdown">
@@ -54,7 +53,9 @@ const Dropdown: FC<DropdownProps> = (props) => {
         handleClick={() => setIsOpen(!isOpen)}
         isOpen={isOpen}
       />
-      {isOpen && <DropdownList options={options} setOption={props.setOption} />}
+      {isOpen && (
+        <DropdownList options={options} handleOptionClick={handleOptionClick} />
+      )}
     </div>
   );
 };
