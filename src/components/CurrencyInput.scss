@@ -1,0 +1,17 @@
+.currency-input {
+  display: flex;
+  align-items: flex-end;
+  span {
+    margin-right: 0.2rem;
+  }
+  span, input {
+    font-size: 3rem;
+  }
+  input {
+    width: 100%;
+    padding: 0;
+    flex-grow: 1;
+    outline: none;
+    border: none;
+  }
+}

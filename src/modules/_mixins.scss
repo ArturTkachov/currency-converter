@@ -1,0 +1,16 @@
+@mixin panels {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+
+  > div {
+    width: 48%;
+  }
+
+  @media (max-width: 480px){
+    flex-direction: column;
+    > div {
+      width: 100%;
+    }
+  }
+}
