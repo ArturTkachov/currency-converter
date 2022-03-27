@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import useExchangeRates from 'hooks/useExchangeRates';
-import { Currency, LowercaseCurrency } from 'types/Currency';
+import { Currency } from 'types/Currency';
 import './ExchangeRate.scss';
 
 interface Props {
@@ -10,17 +10,13 @@ interface Props {
 
 const ExchangeRate: FC<Props> = React.memo((props) => {
   const { from, to } = props;
-  const { data: ratios } = useExchangeRates(props.from);
-  const ratio =
-    ratios &&
-    (+ratios[from.toLowerCase() as LowercaseCurrency][
-      to.toLowerCase() as LowercaseCurrency
-    ]).toFixed(4);
+  const { data } = useExchangeRates(from);
+  const rate = data && data.rates[to];
 
   return (
     <div className="exchange-rate">
       <span>Current rate</span>
-      <span>{ratio ? ratio : '0.0000'}</span>
+      <span>{rate ? rate : '0.0000'}</span>
     </div>
   );
 });

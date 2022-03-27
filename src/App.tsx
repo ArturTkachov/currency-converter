@@ -7,20 +7,19 @@ import PinkButton from 'components/PinkButton';
 import ExchangeRate from 'components/ExchangeRate';
 import RateChange from 'components/RateChange';
 import SelectablePeriodRateChart from './components/chart/SelectablePeriodRateChart';
-import { getRateFromRates } from 'utility/getRateFromRates';
 import { Currency } from 'types/Currency';
 import './App.scss';
 
 function App() {
   const [from, setFrom] = useState<Currency>('USD');
-  const [to, setTo] = useState<Currency>('BYN');
-  const currencies: Currency[] = ['USD', 'BYN', 'RUB'];
+  const [to, setTo] = useState<Currency>('CZK');
+  const currencies: Currency[] = ['USD', 'EUR', 'CZK'];
 
   const [fromValue, setFromValue] = useState('');
   const [toValue, setToValue] = useState('');
 
   const { data } = useExchangeRates(from);
-  const rate = data ? getRateFromRates(data, from, to) : 1;
+  const rate = data ? data.rates[to] : 1;
 
   const handleFromValueChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = parseFloat(e.target.value);
@@ -39,11 +38,11 @@ function App() {
   const [isSwapped, setIsSwapped] = useState(false);
   const handleSwap = () => {
     if (isSwapped) {
-      setFromValue(getProductToFixed(+fromValue, rate));
+      setFromValue(toValue);
       setToValue(getProductToFixed(+toValue, rate));
     } else {
       setFromValue(getQuotientToFixed(+fromValue, rate));
-      setToValue(getQuotientToFixed(+toValue, rate));
+      setToValue(fromValue);
     }
     setIsSwapped(!isSwapped);
   };

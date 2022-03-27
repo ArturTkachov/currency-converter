@@ -43,9 +43,7 @@ const PeriodRateChart: FC<Props> = React.memo((props) => {
       promises.push(getCurrencyRatesForDate(from, dateString));
     }
     promises.push(getExchangeRates(from));
-    Promise.all(promises).then((data) =>
-      setData(getNormalizedRates(data, from, to))
-    );
+    Promise.all(promises).then((data) => setData(getNormalizedRates(data, to)));
   }, [period, from, to]);
 
   return (
