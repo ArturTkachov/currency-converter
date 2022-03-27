@@ -38,11 +38,11 @@ function App() {
   const [isSwapped, setIsSwapped] = useState(false);
   const handleSwap = () => {
     if (isSwapped) {
-      setFromValue(getProductToFixed(+fromValue, rate));
+      setFromValue(toValue);
       setToValue(getProductToFixed(+toValue, rate));
     } else {
       setFromValue(getQuotientToFixed(+fromValue, rate));
-      setToValue(getQuotientToFixed(+toValue, rate));
+      setToValue(fromValue);
     }
     setIsSwapped(!isSwapped);
   };
