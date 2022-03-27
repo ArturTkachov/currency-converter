@@ -6,9 +6,11 @@ import { getProductToFixed, getQuotientToFixed } from 'utility/multiplication';
 import PinkButton from 'components/PinkButton';
 import ExchangeRate from 'components/ExchangeRate';
 import RateChange from 'components/RateChange';
-import { getRateFromRates } from './utility/getRateFromRates';
+import { getRateFromRates } from 'utility/getRateFromRates';
 import { Currencies, Currency } from 'types/Currency';
 import './App.scss';
+
+import PeriodRateChart from 'components/chart/PeriodRateChart';
 
 function App() {
   const [from, setFrom] = useState<Currency>('USD');
@@ -88,6 +90,11 @@ function App() {
           <RateChange from={isSwapped ? to : from} to={isSwapped ? from : to} />
         </div>
       </div>
+      <PeriodRateChart
+        period="1w"
+        from={isSwapped ? to : from}
+        to={isSwapped ? from : to}
+      />
     </main>
   );
 }

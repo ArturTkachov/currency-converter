@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import { Currency } from 'types/Currency';
 import { ExchangeRates } from 'types/api';
 
-export const getCurrencyRatios = async (
+export const getCurrencyRatesForDate = async (
   currency: Currency,
   date: string
 ): Promise<ExchangeRates> => {
@@ -14,7 +14,7 @@ export const getCurrencyRatios = async (
 };
 
 const useDateRates = (currency: Currency, date: string) => {
-  const { data, error } = useSWR([currency, date], getCurrencyRatios);
+  const { data, error } = useSWR([currency, date], getCurrencyRatesForDate);
 
   return {
     data,
