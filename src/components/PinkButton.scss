@@ -1,16 +1,14 @@
-@use 'src/modules/colors.scss';
+@use 'src/modules/colors';
+@use 'src/modules/resets';
 
 .pink-button {
-  outline: none;
-  border: none;
   color: white;
   padding: 1rem 0;
   width: 100%;
-  //padding: 1rem 10rem;
   cursor: pointer;
   border-radius: 13rem;
-  //max-width: 100%;
   background-color: colors.$pink;
+  @include resets.button;
   &:hover {
     background-color: darken(colors.$pink, 10%);
   }
