@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import chevronSrc from '../assets/chevron-right.svg';
 import './Dropdown.scss';
 
@@ -45,8 +45,20 @@ const Dropdown: FC<DropdownProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { options, currentOptionIndex: index, handleOptionClick } = props;
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      const dropdown = dropdownRef.current;
+      if (dropdown && !dropdown.contains(e.target as Node)) setIsOpen(false);
+    };
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  });
+
   return (
-    <div className="dropdown">
+    <div ref={dropdownRef} className="dropdown">
       <span className="dropdown-label">{props.labelText}</span>
       <DropdownSelected
         value={options[index]}
