@@ -1,0 +1,22 @@
+@use 'src/modules/resets';
+@use 'src/modules/colors';
+
+.selectable-rate-chart {
+  ul {
+    display: flex;
+    border-bottom: 2px solid colors.$grey;
+    @include resets.list;
+    li {
+      margin-bottom: -2px;
+      &.active {
+        border-bottom: 3px solid colors.$pink;
+      }
+    }
+    button {
+      cursor: pointer;
+      padding: 1rem 2rem;
+      background-color: transparent;
+      @include resets.button;
+    }
+  }
+}

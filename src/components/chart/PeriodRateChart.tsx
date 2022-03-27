@@ -9,9 +9,10 @@ import {
 import { getExchangeRates } from 'hooks/useExchangeRates';
 import { ExchangeRates } from 'types/api';
 import { Currency } from 'types/Currency';
+import { Period } from 'types/Period';
 
 interface Props {
-  period: '1w' | '1m' | '1y';
+  period: Period;
   from: Currency;
   to: Currency;
 }
@@ -45,7 +46,7 @@ const PeriodRateChart: FC<Props> = React.memo((props) => {
     Promise.all(promises).then((data) =>
       setData(getNormalizedRates(data, from, to))
     );
-  }, [from, to]);
+  }, [period, from, to]);
 
   return (
     <ResponsiveContainer width="100%" aspect={2.5}>
