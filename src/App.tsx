@@ -5,8 +5,9 @@ import useExchangeRates from 'hooks/useExchangeRates';
 import { getProductToFixed, getQuotientToFixed } from 'utility/multiplication';
 import PinkButton from 'components/PinkButton';
 import ExchangeRate from 'components/ExchangeRate';
-import RateChange from './components/RateChange';
-import { Currencies, Currency, LowercaseCurrency } from 'types/Currency';
+import RateChange from 'components/RateChange';
+import { getRateFromRates } from './utility/getRateFromRates';
+import { Currencies, Currency } from 'types/Currency';
 import './App.scss';
 
 function App() {
@@ -18,11 +19,7 @@ function App() {
   const [toValue, setToValue] = useState('');
 
   const { data } = useExchangeRates(from);
-  let rate = data
-    ? +data[from.toLowerCase() as LowercaseCurrency][
-        to.toLowerCase() as LowercaseCurrency
-      ]
-    : 1;
+  const rate = data ? getRateFromRates(data, from, to) : 1;
 
   const handleFromValueChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = parseFloat(e.target.value);
