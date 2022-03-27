@@ -11,12 +11,12 @@ interface Props {
 const ExchangeRate: FC<Props> = React.memo((props) => {
   const { from, to } = props;
   const { data } = useExchangeRates(from);
-  const rate = data && data.rates[to];
+  const rate = data ? data.rates[to] : 1;
 
   return (
     <div className="exchange-rate">
       <span>Current rate</span>
-      <span>{rate ? rate : '0.0000'}</span>
+      <span>{rate ? rate.toFixed(4) : '0.0000'}</span>
     </div>
   );
 });

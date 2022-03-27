@@ -38,14 +38,12 @@ function App() {
   const handleFromOptionClick = (option: string) => {
     setFrom(option as Currency);
     const rate = data ? data.rates[option as Currency] : 1;
-    console.log(rate, toValue);
     setToValue(getQuotientToFixed(+toValue, rate));
   };
 
   const handleToOptionClick = (option: string) => {
     setTo(option as Currency);
     const rate = data ? data.rates[option as Currency] : 1;
-    console.log(rate, fromValue);
     setFromValue(getProductToFixed(+toValue, rate));
   };
 
