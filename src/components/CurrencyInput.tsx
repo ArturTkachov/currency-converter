@@ -21,7 +21,7 @@ const CurrencyInput: FC<Props> = (props) => {
       <span>{sign}</span>
       <input
         type="number"
-        placeholder="0,0"
+        placeholder="0,00"
         value={props.value}
         onChange={props.handleChange}
       />

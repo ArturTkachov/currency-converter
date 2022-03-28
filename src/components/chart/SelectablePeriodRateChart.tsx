@@ -10,8 +10,8 @@ interface Props {
 }
 
 const SelectablePeriodRateChart: FC<Props> = React.memo((props) => {
-  const periods: Period[] = ['1w', '1m', '1y'];
-  const [activePeriod, setActivePeriod] = useState<Period>('1w');
+  const periods: Period[] = ['1w', '1m', '3m', '6m', '1y'];
+  const [activePeriod, setActivePeriod] = useState<Period>('1y');
 
   return (
     <div className="selectable-rate-chart">

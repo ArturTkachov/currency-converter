@@ -8,7 +8,15 @@ export const getExchangeRates = async (
   const res = await fetch(
     `https://api.frankfurter.app/latest?from=${currency}`
   );
-  return await res.json();
+
+  const json: ExchangeRates = await res.json();
+  return {
+    ...json,
+    rates: {
+      [currency]: 1,
+      ...json.rates,
+    },
+  };
 };
 
 const useExchangeRates = (currency: Currency) => {

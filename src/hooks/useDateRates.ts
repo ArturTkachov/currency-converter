@@ -10,7 +10,14 @@ export const getCurrencyRatesForDate = async (
     `https://api.frankfurter.app/${date}?from=${currency}`
   );
 
-  return await res.json();
+  const json: ExchangeRates = await res.json();
+  return {
+    ...json,
+    rates: {
+      [currency]: 1,
+      ...json.rates,
+    },
+  };
 };
 
 const useDateRates = (currency: Currency, date: string) => {

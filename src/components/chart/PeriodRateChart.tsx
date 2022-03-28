@@ -23,11 +23,15 @@ const PeriodRateChart: FC<Props> = React.memo((props) => {
   const shifts = {
     '1w': 86400000,
     '1m': 86400000,
+    '3m': 86400000 * 6,
+    '6m': 86400000 * 12,
     '1y': 86400000 * 30,
   };
   const iterations = {
     '1w': 7,
     '1m': 30,
+    '3m': 15,
+    '6m': 15,
     '1y': 12,
   };
 
